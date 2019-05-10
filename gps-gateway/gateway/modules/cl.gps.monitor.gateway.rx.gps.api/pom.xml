@@ -8,13 +8,13 @@
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../cl.gps.monitor.gateway.rx.gps</relativePath>
     </parent>
-    <groupId>cl.gps.monitor.gateway.rx.gps</groupId>
-    <artifactId>gateway-rx-gps</artifactId>
+    <groupId>cl.gps.monitor.gateway.rx.gps.api</groupId>
+    <artifactId>gateway-rx-gps-api</artifactId>
     <version>1.4.0</version>
     <packaging>jar</packaging>
     <name>consola-agente-firmware</name>
     <properties>
-        <java.version>1.9</java.version>
+        <java.version>11</java.version>
 
         <gateway.rx.gps.final.name>${artifactId}</gateway.rx.gps.final.name>
         <gateway.rx.gps.final.version>${project.version}</gateway.rx.gps.final.version>
@@ -39,7 +39,7 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>2.15.0</version>
+            <version>2.20.0</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -50,11 +50,18 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
+                <version>3.8.0</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.ow2.asm</groupId>
+                        <artifactId>asm</artifactId>
+                        <version>6.2</version>
+                    </dependency>
+                </dependencies>
             </plugin>
             <plugin>
                 <artifactId>maven-dependency-plugin</artifactId>
