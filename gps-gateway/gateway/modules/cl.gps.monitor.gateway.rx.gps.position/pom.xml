@@ -10,8 +10,8 @@
         <relativePath>../cl.gps.monitor.gateway.rx.gps</relativePath>
     </parent>
     -->
-    <groupId>cl.gps.monitor.gateway.rx.gps.api</groupId>
-    <artifactId>gateway-rx-gps-api</artifactId>
+    <groupId>cl.gps.monitor.gateway.rx.gps.position</groupId>
+    <artifactId>gateway-rx-gps-position</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
