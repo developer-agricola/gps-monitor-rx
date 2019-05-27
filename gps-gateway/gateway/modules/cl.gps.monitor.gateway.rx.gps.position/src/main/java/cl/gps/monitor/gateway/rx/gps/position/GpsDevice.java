@@ -1,30 +1,9 @@
-/*******************************************************************************
- * Copyright (c) 2011, 2018 Eurotech and/or its affiliates
- *
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *     Eurotech
- *******************************************************************************/
-package org.eclipse.kura.linux.position;
+package cl.gps.monitor.gateway.rx.gps.position;
 
 import static java.util.Objects.requireNonNull;
 
 import java.io.BufferedInputStream;
-import java.io.InputStream;
 
-import org.eclipse.kura.comm.CommConnection;
-import org.eclipse.kura.comm.CommURI;
-import org.eclipse.kura.linux.position.NMEAParser.Code;
-import org.eclipse.kura.linux.position.NMEAParser.ParseException;
-import org.eclipse.kura.position.NmeaPosition;
-import org.eclipse.kura.position.PositionException;
-import org.eclipse.kura.position.PositionListener;
-import org.osgi.service.io.ConnectionFactory;
-import org.osgi.util.position.Position;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -60,7 +39,7 @@ public class GpsDevice {
         return this.uri;
     }
 
-    public synchronized Position getPosition() {
+    public synchronized NmeaPosition getPosition() {
         return this.nmeaParser.getPosition();
     }
 
@@ -93,19 +72,9 @@ public class GpsDevice {
         return this.commThread.isAlive();
     }
 
-    /**
-     * Installation of a serial connection to communicate, using javax.comm.SerialPort
-     * <li>port : the actual device port, such as "/dev/ttyUSB0" in linux</li>
-     * <li>baudRate : baud rate to be configured for the port</li>
-     * <li>stopBits : number of stop bits to be configured for the port</li>
-     * <li>parity : parity mode to be configured for the port</li>
-     * <li>bitsPerWord : only RTU mode supported, bitsPerWord must be 8</li>
-     * see {@link org.eclipse.kura.comm.CommConnection CommConnection} package for more
-     * detail.
-     */
     private final class SerialCommunicate extends Thread {
 
-        private InputStream in = null;
+        private GPS in = null;
         private CommConnection conn = null;
         private boolean run = true;
 

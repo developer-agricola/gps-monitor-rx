@@ -29,16 +29,6 @@
             <version>1.10</version>
         </dependency>
         <dependency>
-            <groupId>org.osgi</groupId>
-            <artifactId>org.osgi.util.position</artifactId>
-            <version>1.0.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.osgi</groupId>
-            <artifactId>org.osgi.util.measurement</artifactId>
-            <version>1.0.2</version>
-        </dependency>
-        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
@@ -49,6 +39,12 @@
             <artifactId>mockito-core</artifactId>
             <version>2.20.0</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>cl.gps.monitor.gateway.rx.gps.position</groupId>
+            <artifactId>gateway-rx-gps-position</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
     <build>

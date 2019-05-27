@@ -9,7 +9,8 @@
 	<packaging>pom</packaging>
 
 	<modules>				
-		<module>cl.gps.monitor.gateway.rx.gps</module>
+		<module>cl.gps.monitor.gateway.rx.gps.api</module>
+		<module>cl.gps.monitor.gateway.rx.gps.position</module>
 	</modules>
 
 

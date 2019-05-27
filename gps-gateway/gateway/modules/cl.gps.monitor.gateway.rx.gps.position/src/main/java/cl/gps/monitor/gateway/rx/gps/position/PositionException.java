@@ -1,4 +1,4 @@
-package cl.gps.monitor.gateway.rx.gps.api.position;
+package cl.gps.monitor.gateway.rx.gps.position;
 
 public class PositionException extends Exception {
 

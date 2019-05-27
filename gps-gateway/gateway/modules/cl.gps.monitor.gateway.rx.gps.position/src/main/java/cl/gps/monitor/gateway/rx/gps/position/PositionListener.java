@@ -1,4 +1,4 @@
-package cl.gps.monitor.gateway.rx.gps.api.position;
+package cl.gps.monitor.gateway.rx.gps.position;
 
 
 import de.taimos.gpsd4java.api.IObjectListener;

@@ -1,7 +1,5 @@
 package cl.gps.monitor.gateway.rx.gps.api.position;
 
-import org.osgi.util.position.Position;
-
 /**
  * This interface provides methods getting a geographic position.
  * The OSGI Position class represents a geographic location, based on the WGS84 System
@@ -32,7 +30,7 @@ public interface PositionService {
      *
      * @see org.osgi.util.position.Position Position
      */
-    Position getPosition();
+    NmeaPosition getPosition();
 
     /**
      * Returns the current NMEA geographic position.
