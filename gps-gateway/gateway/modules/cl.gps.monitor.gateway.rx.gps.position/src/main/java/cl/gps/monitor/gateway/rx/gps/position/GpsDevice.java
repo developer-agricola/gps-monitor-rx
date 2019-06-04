@@ -19,20 +19,17 @@ public class GpsDevice {
     private static final int SERIAL_TIMEOUT_MS = 2000;
     private static final int TERMINATION_TIMEOUT_MS = SERIAL_TIMEOUT_MS + 1000;
 
-    private final CommURI uri;
-
-    private final SerialCommunicate commThread;
+    private final GpsdCommunicate gpsdThread;
     private String lastSentence;
 
     private Listener listener;
 
     private final NMEAParser nmeaParser = new NMEAParser();
 
-    public GpsDevice(final ConnectionFactory connFactory, final CommURI commURI, final Listener listener)
+    public GpsDevice(final GpsdConnectionFactory connFactory, final Listener listener)
             throws PositionException {
-        this.uri = commURI;
         this.listener = listener;
-        this.commThread = new SerialCommunicate(connFactory, commURI);
+        this.gpsdThread = new GpsdCommunicate(connFactory, commURI);
     }
 
     public CommURI getCommURI() {
@@ -61,7 +58,7 @@ public class GpsDevice {
 
     public void disconnect() {
         this.listener = null;
-        this.commThread.disconnect();
+        this.gpsdThread.disconnect();
     }
 
     public String getLastSentence() {
@@ -69,19 +66,17 @@ public class GpsDevice {
     }
 
     public boolean isConnected() {
-        return this.commThread.isAlive();
+        return this.gpsdThread.isAlive();
     }
 
-    private final class SerialCommunicate extends Thread {
-
-        private GPS in = null;
-        private CommConnection conn = null;
+    private final class GpsdCommunicate extends Thread {
+        //Todo create a common interface
+        private GpsdConnectionFactory conn = null;
         private boolean run = true;
 
-        public SerialCommunicate(final ConnectionFactory connFactory, final CommURI commURI) throws PositionException {
+        public GpsdCommunicate(final GpsdConnectionFactory connFactory, final CommURI commURI) throws PositionException {
             try {
-                this.conn = (CommConnection) connFactory.createConnection(enableTimeouts(commURI).toString(), 1, false);
-                this.in = new BufferedInputStream(requireNonNull(this.conn.openInputStream()));
+                this.conn = connFactory;
             } catch (Exception e) {
                 closeSerialPort();
                 throw new PositionException("Failed to open serial port", e);
