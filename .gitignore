@@ -78,3 +78,4 @@ agriapp-lite-command-side/.idea/vcs.xml
 .project
 .settings/
 target/
+.flatten*
