@@ -1,0 +1,182 @@
+<mat-sidenav-container class="example-container" fxFlexFill>
+  <mat-sidenav #sidenav mode="over">
+    hola
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="container"
+         fxLayout fxLayout.xs="column">
+      <div class="gps-header-toolbar" fxFlex="100%">
+        <mat-toolbar color="primary">
+          <mat-toolbar-row>
+            <div class="container"
+                 fxLayout
+                 fxFlexFill
+                 fxLayout.xs="column">
+              <div class="gps-header-menu" fxFlex="30%" fxLayoutAlign="start center">
+                <button mat-icon-button matTooltip="Navigation menu" color="write" (click)="sidenav.toggle()">
+                  <mat-icon>menu</mat-icon>
+                </button>
+                <button mat-icon-button disabled>
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                Gps Monitor
+              </div>
+              <div class="gps-header-find" fxFlex="40%" fxLayoutAlign="center center">
+                <!--<mat-form-field appearance="fill" color="write">
+                  <input matInput placeholder="Simple place holder">
+                  <mat-icon matSuffix>search</mat-icon>
+                </mat-form-field>-->
+              </div>
+              <div class="gps-options" fxFlex="25%" fxLayoutAlign="end center">
+                <button mat-icon-button disabled>
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <button mat-icon-button color="write" matTooltip="Help">
+                  <mat-icon>help</mat-icon>
+                </button>
+                <button mat-icon-button color="write" matTooltip="Notifications">
+                  <mat-icon>notifications</mat-icon>
+                </button>
+              </div>
+              <div class="gps-options" fxFlex="5%" fxLayoutAlign="center center">
+                <button mat-icon-button color="write" disabled>
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <button mat-icon-button color="write" matTooltip="User Preferences">
+                  <mat-icon>perm_identity</mat-icon>
+                </button>
+              </div>
+            </div>
+          </mat-toolbar-row>
+        </mat-toolbar>
+      </div>
+    </div>
+    <div class="container"
+         fxLayout
+         fxLayout.xs="column" style="height: 89%; padding: 10px">
+      <div class="item item-2" fxFlex="80%">
+        <google-map width="99%" height="100%"></google-map>
+      </div>
+      <div class="item item-3" fxFlex="20%">
+        <div class="container"
+             fxLayout
+             fxLayout.xs="row">
+          <div class="gps-find" fxFlex="100%" style="font-size: 12px">
+            <mat-form-field appearance="fill" color="write" fxFlexFill>
+              <input matInput placeholder="Simple place holder">
+              <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+          </div>
+        </div>
+        <mat-card>
+          <mat-card-content>
+            <div class="container"
+                 fxLayout
+                 fxLayout.xs="row">
+              <div class="gps-list-icon" fxFlex="20%" fxLayoutAlign="start center">
+                <button mat-icon-button disabled>
+                  <mat-icon>gps_fixed</mat-icon>
+                </button>
+              </div>
+              <div class="gps-list-title" fxFlex="80%" fxLayoutAlign="start center">
+                Palta Tomate Mario
+              </div>
+              <div class="gps-list-options" fxFlex="5%" fxLayoutAlign="end center">
+                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item>
+                    <mat-icon>dialpad</mat-icon>
+                    <span>Redial</span>
+                  </button>
+                  <button mat-menu-item disabled>
+                    <mat-icon>voicemail</mat-icon>
+                    <span>Check voice mail</span>
+                  </button>
+                  <button mat-menu-item>
+                    <mat-icon>notifications_off</mat-icon>
+                    <span>Disable alerts</span>
+                  </button>
+                </mat-menu>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+        <br/>
+        <mat-card>
+          <mat-card-content>
+            <div class="container"
+                 fxLayout
+                 fxLayout.xs="row">
+              <div class="gps-list-icon" fxFlex="20%" fxLayoutAlign="start center">
+                <button mat-icon-button disabled>
+                  <mat-icon>gps_fixed</mat-icon>
+                </button>
+              </div>
+              <div class="gps-list-title" fxFlex="80%" fxLayoutAlign="start center">
+                Shushi Curico
+              </div>
+              <div class="gps-list-options" fxFlex="5%" fxLayoutAlign="end center">
+                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item>
+                    <mat-icon>dialpad</mat-icon>
+                    <span>Redial</span>
+                  </button>
+                  <button mat-menu-item disabled>
+                    <mat-icon>voicemail</mat-icon>
+                    <span>Check voice mail</span>
+                  </button>
+                  <button mat-menu-item>
+                    <mat-icon>notifications_off</mat-icon>
+                    <span>Disable alerts</span>
+                  </button>
+                </mat-menu>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+        <br/>
+        <mat-card>
+          <mat-card-content>
+            <div class="container"
+                 fxLayout
+                 fxLayout.xs="row">
+              <div class="gps-list-icon" fxFlex="20%" fxLayoutAlign="start center">
+                <button mat-icon-button disabled>
+                  <mat-icon>gps_fixed</mat-icon>
+                </button>
+              </div>
+              <div class="gps-list-title" fxFlex="80%" fxLayoutAlign="start center">
+                Anitas Pub Discoteque
+              </div>
+              <div class="gps-list-options" fxFlex="5%" fxLayoutAlign="end center">
+                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item>
+                    <mat-icon>dialpad</mat-icon>
+                    <span>Redial</span>
+                  </button>
+                  <button mat-menu-item disabled>
+                    <mat-icon>voicemail</mat-icon>
+                    <span>Check voice mail</span>
+                  </button>
+                  <button mat-menu-item>
+                    <mat-icon>notifications_off</mat-icon>
+                    <span>Disable alerts</span>
+                  </button>
+                </mat-menu>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
