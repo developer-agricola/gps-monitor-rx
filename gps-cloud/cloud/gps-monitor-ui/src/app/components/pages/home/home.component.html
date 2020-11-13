@@ -1,0 +1,32 @@
+<mat-sidenav-container class="example-container" fxFlexFill>
+  <mat-sidenav #sidenav mode="over">
+    hola
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="container"
+         fxLayout fxLayout.xs="column">
+      <div class="header-toolbar" fxFlex="100%">
+        <app-header-toolbar></app-header-toolbar>
+      </div>
+    </div>
+    <div class="container"
+         fxLayout
+         fxLayout.xs="column" style="height: 89%; padding: 10px">
+      <div class="google-map" fxFlex="80%" style="border: 1px dotted #ccc">
+        <app-google-map width="99%" height="100%"></app-google-map>
+      </div>
+      <div class="item item-3" fxFlex="20%">
+        <div class="container"
+             fxLayout
+             fxLayout.xs="row">
+          <div class="gps-map-find" fxFlex="100%" style="font-size: 12px">
+            <app-gps-map-find></app-gps-map-find>
+          </div>
+        </div>
+        <div class="gps-map-list">
+          <app-gps-map-list></app-gps-map-list>
+        </div>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

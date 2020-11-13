@@ -1,18 +1,206 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>cl.gps.monitor.gateway</groupId>
 	<artifactId>gps-monitor-gateway</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
+	<description>
+		<!-- TODO comment -->
+	</description>
 
-	<modules>				
-		<module>cl.gps.monitor.gateway.rx.gps.api</module>
-		<module>cl.gps.monitor.gateway.rx.gps.position</module>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<java.version>1.8</java.version>
+
+		<fabric8io.docker.version>0.30.0</fabric8io.docker.version>
+		<gps-gateway.final.name>gps-gateway</gps-gateway.final.name>
+		<gps-gateway.final.version>${project.version}</gps-gateway.final.version>
+
+		<deploy.local.docker.host>tcp://localhost:2375</deploy.local.docker.host>
+	</properties>
+
+	<modules>
+		<module>cl.gps.monitor.gateway.gps.api</module>
+		<module>cl.gps.monitor.gateway.gps.configuration</module>
+		<module>cl.gps.monitor.gateway.gps.cli</module>
 	</modules>
+	<profiles>
+		<profile>
+			<id>create-runtime-image-windows-dev</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
 
+			</properties>
+			<dependencies>
+				<!-- root module -->
+				<dependency>
+					<groupId>cl.gps.monitor.gateway.gps</groupId>
+					<artifactId>gateway-gps-cli</artifactId>
+					<version>0.0.1-SNAPSHOT</version>
+				</dependency>
+			</dependencies>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-dependency-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>package</phase>
+								<goals>
+									<goal>copy-dependencies</goal>
+								</goals>
+								<configuration>
+									<outputDirectory>${project.build.directory}/modules</outputDirectory>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.moditect</groupId>
+						<artifactId>moditect-maven-plugin</artifactId>
+						<version>1.0.0.RC1</version>
+						<executions>
+							<execution>
+								<id>create-runtime-image</id>
+								<phase>package</phase>
+								<goals>
+									<goal>create-runtime-image</goal>
+								</goals>
+								<configuration>
+									<modulePath>
+										<path>
+											${project.build.directory}/modules
+										</path>
+									</modulePath>
+									<modules>
+										<module>gateway.gps.cli</module>
+										<module>gateway.gps.api</module>
+										<module>gateway.gps.configuration</module>
+									</modules>
+									<!-- see ~/.m2/toolchains.xml for more information -->
+									<baseJdk>version=11,vendor=oracle,platform=windows-x64</baseJdk>
+									<launcher>
+										<name>GpsGatewayApp</name>
+										<module>
+											gateway.gps.cli/cl.gps.monitor.gateway.gps.cli.GpsGatewayApp
+										</module>
+									</launcher>
+									<outputDirectory>
+										${project.build.directory}/${gps-gateway.final.name}-image
+									</outputDirectory>
+									<noHeaderFiles></noHeaderFiles>
+									<noManPages></noManPages>
+									<compression>2</compression>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>deploy-runtime-image-dev</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
 
-
+			</properties>
+			<dependencies>
+				<!-- root module -->
+				<dependency>
+					<groupId>cl.gps.monitor.gateway.gps</groupId>
+					<artifactId>gateway-gps-cli</artifactId>
+					<version>0.0.1-SNAPSHOT</version>
+				</dependency>
+			</dependencies>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-dependency-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>package</phase>
+								<goals>
+									<goal>copy-dependencies</goal>
+								</goals>
+								<configuration>
+									<outputDirectory>${project.build.directory}/modules</outputDirectory>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.moditect</groupId>
+						<artifactId>moditect-maven-plugin</artifactId>
+						<version>1.0.0.RC1</version>
+						<executions>
+							<execution>
+								<id>create-runtime-image</id>
+								<phase>package</phase>
+								<goals>
+									<goal>create-runtime-image</goal>
+								</goals>
+								<configuration>
+									<modulePath>
+										<path>
+											${project.build.directory}/modules
+										</path>
+									</modulePath>
+									<modules>
+										<module>gateway.gps.cli</module>
+										<module>gateway.gps.api</module>
+										<module>gateway.gps.configuration</module>
+									</modules>
+									<!-- see ~/.m2/toolchains.xml for more information -->
+									<baseJdk>version=11,vendor=oracle,platform=linux-x64</baseJdk>
+									<launcher>
+										<name>GpsGatewayApp</name>
+										<module>
+											gateway.gps.cli/cl.gps.monitor.gateway.gps.cli.GpsGatewayApp
+										</module>
+									</launcher>
+									<outputDirectory>
+										${project.build.directory}/${gps-gateway.final.name}-image
+									</outputDirectory>
+									<compression>2</compression>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>io.fabric8</groupId>
+						<artifactId>docker-maven-plugin</artifactId>
+						<version>${fabric8io.docker.version}</version>
+						<configuration>
+							<dockerHost>${deploy.local.docker.host}</dockerHost>
+							<!-- add your local certs -->
+							<!--<certPath>${basedir}/src/docker/machine/certs</certPath>-->
+							<useColor>true</useColor>
+							<verbose>true</verbose>
+							<skip>false</skip>
+							<images>
+								<image>
+									<name>jdanieldeveloper/${gps-gateway.final.name}:${gps-gateway.final.version}</name>
+									<alias>${project.name}</alias>
+									<build>
+										<contextDir>${basedir}</contextDir>
+										<!--<filter>@</filter> -->
+										<dockerFile>${basedir}/docker/Dockerfile</dockerFile>
+									</build>
+								</image>
+							</images>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>

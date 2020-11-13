@@ -1,0 +1,12 @@
+Comandos utiles docker
+
+>docker ps -a
+
+docker container prune
+docker run --name=gps-gateway jdanieldeveloper/gps-gateway:0.0.1-SNAPSHOT
+docker exec -it gps-gateway /bin/bash
+
+du -sh .
+
+
+mvn install docker:build -Ddocker.username=jdanieldeveloper -Ddocker.password=71maPOvido docker:push
